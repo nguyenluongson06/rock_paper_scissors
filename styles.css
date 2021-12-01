@@ -1,0 +1,20 @@
+p {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  width: 100vw;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.btn {
+  width: auto;
+  min-width: 15vw;
+}
+
+div {
+  text-align: center;
+}

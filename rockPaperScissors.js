@@ -5,36 +5,38 @@ function computerPlay() {   //generate random computer play
 }
 
 function playRound(playerSelection, computerSelection) {    //takes player selection and evaluate result
-    playerSelection = prompt('Please enter your selection: ').toLowerCase();
-    if (!array.includes(playerSelection)) {
-        alert('Your choice wasn\'t rock, paper, or scissors. Please choose again.');
-        playerSelection = prompt('Please enter your selection: ').toLowerCase();
-    }
-    computerSelection = computerPlay();
-    temp = playerSelection[0].toUpperCase() + playerSelection.slice(1, playerSelection.length);
     if (computerSelection == playerSelection) {
-        return('Tie')
+        return('tie')
     } else if (playerSelection == array[3] && computerSelection == array[1] || array.indexOf(playerSelection) < array.indexOf(computerSelection)) {
-        return(`You lost. ${temp} lose to ${computerSelection}`);
+        return('lost')
     } else if (playerSelection == array[1] && computerSelection == array[3] || array.indexOf(playerSelection) > array.indexOf(computerSelection)) {
-        return(`You won. ${temp} win to ${computerSelection}`);
+        return('won')
     }
 }
+let playerScore = 0;
+let computerScore = 0;
 
-function game() {   //looping main game 5 times and keeping scores
-    let playerScore = 0;
-    let computerScore = 0;
-    while (playerScore < 5 && computerScore < 5) {
-        let ans = playRound();
-        console.log(ans);
-        if (ans.includes('won')) {
-            playerScore++;
-        } else if (ans.includes('lost')) {
-            computerScore++;
-        }
+const buttons = document.querySelectorAll('.btn');
+const body = document.querySelector('body');
+const div = document.createElement('div');
+
+buttons.forEach(buttons => buttons.addEventListener('click',function()
+{
+  if (playerScore<5 && computerScore<5)
+  {
+    playerSelection = this.id;
+    console.log(playerSelection);
+    let ans = playRound(playerSelection,computerPlay());
+    console.log(ans);
+    if (ans.includes('won')) {
+     playerScore++;
+    } else if (ans.includes('lost')) {
+      computerScore++;
     }
+  }
+  else {
+    div.textContent = `Player ${playerScore}-${computerScore} Computer`;
+    body.appendChild(div);
+  }
+}))
 
-    console.log(`Final score: Player ${playerScore}-${computerScore} Computer`);
-}
-
-game();
